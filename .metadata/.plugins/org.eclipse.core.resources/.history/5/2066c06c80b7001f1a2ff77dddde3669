@@ -1,0 +1,44 @@
+package com.clush.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.clush.dto.ToDoDto;
+import com.clush.entity.CalendarEntity;
+import com.clush.entity.TodoEntity;
+import com.clush.respository.CalendarRepository;
+import com.clush.respository.ToDoRepository;
+
+@Service
+public class ToDoService {
+
+	@Autowired
+	private ToDoRepository toDoRepository;
+	@Autowired
+	private CalendarRepository calendarRepository;
+	
+	public ResponseEntity<Void> saveToDoService(ToDoDto toDoDto){
+		// 이미 존재하는 date를 가진 CalendarEntity 조회
+	    CalendarEntity calendarEntity = calendarRepository.findByDate(toDoDto.getDate());
+	    
+	    if (calendarEntity == null) {
+	        // date가 같은 CalendarEntity가 없다면 새로 생성
+	        calendarEntity = new CalendarEntity();
+	        calendarEntity.setDate(toDoDto.getDate()); // 날짜 설정
+	    }
+	    
+	    // 새로운 TodoEntity 생성
+	    TodoEntity todoEntity = new TodoEntity(toDoDto);
+	    
+	    // TodoEntity를 CalendarEntity의 todos 리스트에 추가
+	    todoEntity.setCalendar(calendarEntity);  // TodoEntity가 CalendarEntity를 참조하도록 설정
+	    calendarEntity.getTodos().add(todoEntity);  // CalendarEntity의 todos 리스트에 TodoEntity 추가
+	    
+	    // CalendarEntity 저장 (TodoEntity도 자동으로 저장됨)
+	    calendarRepository.save(calendarEntity);
+		
+		return ResponseEntity.ok().build();
+	}
+	
+}

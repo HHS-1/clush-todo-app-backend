@@ -1,0 +1,11 @@
+package com.clush.respository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.clush.entity.TodoEntity;
+
+public interface ToDoRepository extends JpaRepository<TodoEntity, Long> {
+    List<TodoEntity> findByDate(String date);
+}

@@ -1,0 +1,5 @@
+package com.clush.advice;
+
+public class GlobalExceptionHandler {
+
+}

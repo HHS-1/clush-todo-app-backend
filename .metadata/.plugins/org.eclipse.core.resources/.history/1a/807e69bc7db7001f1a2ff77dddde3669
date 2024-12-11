@@ -1,0 +1,21 @@
+package com.clush.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.clush.dto.ToDoDto;
+import com.clush.entity.TodoEntity;
+import com.clush.respository.ToDoRepository;
+
+@Service
+public class ToDoService {
+
+	@Autowired
+	private ToDoRepository toDoRepository;
+	
+	public ResponseEntity<Void> saveToDoService(ToDoDto toDoDto){
+		TodoEntity toDoEntity = new TodoEntity(toDoDto);
+	}
+	
+}

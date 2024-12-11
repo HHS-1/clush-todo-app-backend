@@ -1,0 +1,63 @@
+package com.clush.service;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.clush.dto.ToDoDto;
+import com.clush.entity.CalendarEntity;
+import com.clush.entity.TodoEntity;
+import com.clush.respository.CalendarRepository;
+import com.clush.respository.ToDoRepository;
+
+@Service
+public class ToDoService {
+
+	@Autowired
+	private ToDoRepository toDoRepository;
+	@Autowired
+	private CalendarRepository calendarRepository;
+	
+	@Transactional(readOnly = true)
+	public ResponseEntity<List<TodoEntity>> getTodayToDoService() {
+        
+		Date date = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String today = dateFormat.format(date);
+		
+        // 오늘 날짜에 해당하는 ToDo 조회
+        TodoEntity todayToDos = toDoRepository.findById(1);
+        System.out.println(todayToDos);
+        
+        
+
+        return ResponseEntity.ok().build();
+    }
+	
+	public ResponseEntity<Void> saveToDoService(ToDoDto toDoDto){
+		
+		//추가된 작업의 날짜에 해당하는 캘린더 Entity 호출
+	    CalendarEntity calendarEntity = calendarRepository.findByDate(toDoDto.getDate());
+	    
+	    if (calendarEntity == null) { // 없으면 추가
+
+	        calendarEntity = new CalendarEntity();
+	        calendarEntity.setDate(toDoDto.getDate());
+	    }
+	    
+	    TodoEntity todoEntity = new TodoEntity(toDoDto);
+	    	   
+	    todoEntity.setCalendar(calendarEntity); 
+	    calendarEntity.getTodos().add(todoEntity); 
+	    
+	    calendarRepository.save(calendarEntity);
+		
+		return ResponseEntity.ok().build();
+	}
+	
+}

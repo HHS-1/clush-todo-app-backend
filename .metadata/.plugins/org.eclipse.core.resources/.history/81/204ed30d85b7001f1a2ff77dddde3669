@@ -1,0 +1,9 @@
+package com.clush.respository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.clush.entity.TodoEntity;
+
+public interface ToDoRepository extends JpaRepository<TodoEntity, Long> {
+
+}

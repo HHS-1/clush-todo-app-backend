@@ -1,0 +1,20 @@
+package com.clush.controller;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.clush.dto.ToDoDto;
+
+@RestController
+@RequestMapping("to-do")
+public class ToDoController {
+	
+	@PostMapping
+	public ResponseEntity<String> saveToDo(@RequestBody ToDoDto toDoDto){
+		System.out.println(toDoDto);
+		return null;
+	}
+}
