@@ -1,0 +1,23 @@
+package com.clush.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.clush.entity.CalendarEntity;
+import com.clush.respository.CalendarRepository;
+
+@Service
+public class CalendarService {
+	
+	@Autowired
+	private CalendarRepository calendarRepository;
+	
+	public ResponseEntity<List<CalendarEntity>> getCalendarService(String yearMonth){
+		System.out.println(yearMonth);
+		return ResponseEntity.ok(calendarRepository.findByDateStartingWith(yearMonth));
+	}
+}

@@ -1,0 +1,29 @@
+package com.clush.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.clush.auth.JwtUtil;
+import com.clush.dto.LoginDto;
+import com.clush.entity.UserEntity;
+import com.clush.respository.UserRepository;
+
+@Service
+public class UserService {
+	
+	@Autowired
+	private JwtUtil jwtUtil;
+	@Autowired
+	private RedisTokenService redisTokenService;
+	@Autowired
+	private UserRepository userRepository;
+	
+	public ResponseEntity<Void> loginService(LoginDto loginDto){
+		
+		UserEntity userEntity = new UserEntity(loginDto);
+		
+		return null;
+	}
+	
+}

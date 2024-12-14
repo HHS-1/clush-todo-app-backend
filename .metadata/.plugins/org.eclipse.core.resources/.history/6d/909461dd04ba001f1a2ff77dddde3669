@@ -1,0 +1,50 @@
+package com.clush.auth;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+	@Autowired
+    private JwtFilter jwtFilter;
+
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        // AuthenticationManager를 설정하기 위한 코드
+        return http.getSharedObject(AuthenticationManagerBuilder.class)
+                   .build();
+    }
+
+    @Bean
+	 public  SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+		 http
+		 .csrf(csrf -> csrf
+       		 .disable() // CSRF 토큰을 쿠키로 전송(나중에 disable)
+        )
+        .authorizeHttpRequests(authorize -> authorize
+   		 .requestMatchers("/login").hasAnyAuthority("user")
+   		 .anyRequest().authenticated() // 그 외 모든 요청은 인증 필요
+        )
+        .formLogin(authorize->authorize.disable()	//form 로그인 방식 비활성화
+        )
+        .httpBasic(authorize->authorize.disable()		//http basic 인증 방식 비활성화
+        )
+        .sessionManagement((session) -> session
+       		.sessionCreationPolicy(SessionCreationPolicy.STATELESS)		//session 사용 안함
+        )
+
+		.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class
+		);
+		 return http.build();
+	 }
+}

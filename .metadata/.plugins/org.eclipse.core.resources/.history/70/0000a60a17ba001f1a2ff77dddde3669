@@ -1,0 +1,33 @@
+package com.clush.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.clush.auth.JwtUtil;
+import com.clush.dto.UserDto;
+import com.clush.entity.UserEntity;
+import com.clush.respository.UserRepository;
+
+@Service
+public class UserService {
+	
+	@Autowired
+	private JwtUtil jwtUtil;
+	@Autowired
+	private RedisTokenService redisTokenService;
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	public ResponseEntity<Void> loginService(UserDto userDto){
+		
+		UserEntity userEntity = new UserEntity();
+		userEntity.setUserId(userDto.getUserId());
+		userEntity.setUserPassWord(passwordEncoder.encode(userDto.getUserPassWord()));
+		return null;
+	}
+	
+}

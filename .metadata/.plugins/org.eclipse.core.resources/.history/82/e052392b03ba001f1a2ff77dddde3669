@@ -1,0 +1,19 @@
+package com.clush.auth;
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.List;
+
+public class JwtAuthenticationToken extends UsernamePasswordAuthenticationToken {
+	private static final long serialVersionUID = 1L;
+
+	public JwtAuthenticationToken(String principal, Object credentials, List<GrantedAuthority> authorities) {
+        super(principal, credentials, authorities);
+    }
+
+    public JwtAuthenticationToken(String principal, Object credentials, String... roles) {
+        super(principal, credentials, List.of(new SimpleGrantedAuthority("ROLE_" + String.join(",", roles))));
+    }
+}

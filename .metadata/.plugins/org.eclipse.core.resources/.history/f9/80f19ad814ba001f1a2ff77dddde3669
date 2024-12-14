@@ -1,0 +1,16 @@
+package com.clush.service;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.clush.dto.LoginDto;
+
+@Service
+public class UserService {
+	
+	public ResponseEntity<Void> loginService(LoginDto loginDto){
+		
+		return null;
+	}
+	
+}

@@ -1,0 +1,16 @@
+package com.clush.service;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.clush.entity.CalendarEntity;
+
+@Service
+public class CalendarService {
+	
+	public ResponseEntity<List<CalendarEntity>> getCalendarService(){
+		return null;
+	}
+}

@@ -1,0 +1,5 @@
+package com.clush.config;
+
+public class WebConfig {
+
+}

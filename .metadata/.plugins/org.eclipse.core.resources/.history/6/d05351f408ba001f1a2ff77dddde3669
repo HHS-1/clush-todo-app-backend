@@ -1,0 +1,5 @@
+package com.clush.entity;
+
+public class UserEntity {
+
+}

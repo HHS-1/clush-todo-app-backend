@@ -1,0 +1,27 @@
+package com.clush.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.clush.dto.UserDto;
+import com.clush.service.UserService;
+
+import jakarta.servlet.http.HttpServletResponse;
+
+@RestController
+@RequestMapping("/login")
+public class UserController {
+	@Autowired
+	private UserService userService;
+	
+	@PostMapping
+	@CrossOrigin(origins = "http://localhost:3000")
+	public ResponseEntity<Void> login(@RequestBody UserDto userDto, HttpServletResponse res){
+		return userService.loginService(userDto, res);
+	}
+}

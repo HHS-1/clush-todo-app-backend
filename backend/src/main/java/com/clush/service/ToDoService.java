@@ -42,6 +42,18 @@ public class ToDoService {
     }
 	
 	@Transactional
+	public ResponseEntity<ToDoEntity> getToDoService(Long id){
+		Optional<ToDoEntity> todo = toDoRepository.findById(id);
+		
+		if (todo.isEmpty()) {
+	        return ResponseEntity.notFound().build();
+	    }
+
+	    ToDoEntity toDoEntity = todo.get();
+		return ResponseEntity.ok(toDoEntity);
+	}
+	
+	@Transactional
 	public ResponseEntity<Void> saveToDoService(ToDoDto toDoDto){
 		
 		//추가된 작업의 날짜에 해당하는 캘린더 Entity 호출
@@ -78,6 +90,35 @@ public class ToDoService {
 		 
 		return ResponseEntity.ok().build();
 		
+	}
+	
+	@Transactional
+	public ResponseEntity<Void> modifyToDoService(Long id, ToDoDto toDoDto){
+		CalendarEntity calendarEntity = calendarRepository.findByDate(toDoDto.getDate());
+		
+		if (calendarEntity == null) {
+
+	        calendarEntity = new CalendarEntity();
+	        calendarEntity.setDate(toDoDto.getDate());
+	    }
+		
+		Optional<ToDoEntity> todo = toDoRepository.findById(id);
+		if (todo.isEmpty()) {
+	        return ResponseEntity.notFound().build();
+	    }
+
+	    ToDoEntity toDoEntity = todo.get();
+	    toDoEntity.setTitle(toDoDto.getTitle());
+	    toDoEntity.setDescription(toDoDto.getDescription());
+	    toDoEntity.setPriority(toDoDto.getPriority());
+	    toDoEntity.setDate(toDoDto.getDate());
+	    toDoEntity.setCalendar(calendarEntity);
+	    
+	    calendarEntity.getTodos().add(toDoEntity);
+	    
+	   calendarRepository.save(calendarEntity);
+	    
+	    return ResponseEntity.ok().build();
 	}
 	
 }
