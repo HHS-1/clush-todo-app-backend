@@ -1,0 +1,30 @@
+package com.clush.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.clush.entity.SharedCalendarEntity;
+import com.clush.service.SharedCalendarService;
+
+@RestController
+@RequestMapping("shared")
+public class SharedCalendarController {
+	
+	@Autowired
+	private SharedCalendarService sharedCalendarService;
+	
+	@GetMapping
+	public ResponseEntity<SharedCalendarDto> getSharedCalendar(){
+		return sharedCalendarService.getSharedCalendarService();
+	}
+	
+	@PostMapping
+	public ResponseEntity<Void> createSharedCalendar(@RequestBody String name){
+		return sharedCalendarService.createSharedCalendarService(name);
+	}
+}

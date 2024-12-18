@@ -16,17 +16,17 @@ public class RedisTokenService {
     }
 
     // 리프레시 토큰 저장
-    public void saveRefreshToken(String userId, String refreshToken, long duration) {
+    public void saveRefreshToken(String accessToken, String refreshToken, long duration) {
         redisTemplate.opsForValue().set(
-            userId, 
+        	accessToken, 
             refreshToken, 
             Duration.ofMillis(duration) // 토큰 만료 시간 설정
         );
     }
 
     // 리프레시 토큰 조회
-    public String getRefreshToken(String userId) {
-        return (String) redisTemplate.opsForValue().get(userId);
+    public String getRefreshToken(String accessToken) {
+        return (String) redisTemplate.opsForValue().get(accessToken);
     }
 
     // 리프레시 토큰 삭제

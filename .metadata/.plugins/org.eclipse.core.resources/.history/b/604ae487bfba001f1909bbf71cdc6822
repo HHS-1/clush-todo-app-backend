@@ -1,0 +1,31 @@
+package com.clush.util;
+
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.clush.auth.CustomUserDetails;
+
+public class UserUtil {
+
+	public static String getUserId() {
+	    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	    if (principal instanceof UserDetails) {
+	        return ((UserDetails) principal).getUsername();  // 또는 다른 UserDetails 필드
+	    } else {
+	        return principal.toString();  // String일 경우 처리
+	    }
+	}
+	
+	public static Long getUserIdAsLong() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            // 예시로 "id" 필드가 UserDetails의 필드로 존재한다고 가정
+            UserDetails userDetails = (UserDetails) principal;
+            // userDetails 객체에 사용자의 ID를 담고 있다고 가정하고, ID를 반환합니다.
+            // (아래는 예시로 ID를 Long 타입으로 반환하는 방식입니다. 실제 필드에 맞춰서 수정해야 합니다.)
+            return ((CustomUserDetails) userDetails).getId();  // CustomUserDetails 클래스의 getId() 메서드
+        } else {
+            throw new IllegalStateException("Principal is not an instance of UserDetails");
+        }
+    }
+}

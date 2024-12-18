@@ -1,0 +1,24 @@
+package com.clush.config;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+	
+	@Value("${spring.data.redis.host}")
+	private String redisAddress;
+	@Value("${spring.data.redis.port}")
+	private String redisPort;
+	
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins(redisAddress + ":" + redisPort) // React 애플리케이션의 주소
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "PETCH")
+                .allowedHeaders("*")
+                .allowCredentials(true);
+    }
+}

@@ -1,0 +1,47 @@
+package com.clush.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.clush.dto.SharedCalendarDto;
+import com.clush.dto.ToDoDto;
+import com.clush.entity.SharedCalendarEntity;
+import com.clush.entity.SharedToDoEntity;
+import com.clush.respository.SharedCalendarRepository;
+
+import jakarta.transaction.Transactional;
+
+@Service
+public class SharedCalendarService {
+	
+	@Autowired
+	private SharedCalendarRepository sharedCalendarRepository;
+	
+	public ResponseEntity<List<SharedCalendarDto>> getSharedCalendarService(){
+		List<SharedCalendarDto> calendars = sharedCalendarRepository.findAllSharedCalendars();
+		return ResponseEntity.ok(calendars);
+	}
+	
+	public ResponseEntity<Void> createSharedCalendarService(String name){
+		SharedCalendarEntity sharedCalendarEntity = new SharedCalendarEntity();
+		sharedCalendarEntity.setName(name);
+		
+		sharedCalendarRepository.save(sharedCalendarEntity);
+		return ResponseEntity.ok().build();
+	}
+	
+	@Transactional
+	public ResponseEntity<Void> createSharedToDoService(long id, ToDoDto toDoDto){
+		SharedCalendarEntity sharedCalendar = sharedCalendarRepository.findById(id)
+				.orElse(null);
+		SharedToDoEntity sharedToDoEntity = new SharedToDoEntity(toDoDto);
+		
+		sharedCalendar.getSharedTodos().add(sharedToDoEntity);
+		sharedCalendarRepository.save(sharedCalendar);
+		
+		return ResponseEntity.ok().build();
+	}
+}

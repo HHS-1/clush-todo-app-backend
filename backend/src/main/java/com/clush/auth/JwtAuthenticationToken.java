@@ -8,11 +8,11 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
 
     private static final long serialVersionUID = 1L;
 
-    private final String principal;
+    private final CustomUserDetails principal;  // CustomUserDetails로 principal 변경
     private String credentials;
 
     // 인증되지 않은 사용자용 생성자
-    public JwtAuthenticationToken(String principal, String credentials) {
+    public JwtAuthenticationToken(CustomUserDetails principal, String credentials) {
         super(null);  
         this.principal = principal;
         this.credentials = credentials;
@@ -20,7 +20,7 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
     }
 
     // 인증된 사용자용 생성자 (권한을 전달)
-    public JwtAuthenticationToken(String principal, String credentials, List<GrantedAuthority> authorities) {
+    public JwtAuthenticationToken(CustomUserDetails principal, String credentials, List<GrantedAuthority> authorities) {
         super(authorities);  // 권한을 부모 클래스에 전달
         this.principal = principal;
         this.credentials = credentials;

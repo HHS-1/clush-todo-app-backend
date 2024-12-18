@@ -1,0 +1,12 @@
+package com.clush.respository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.clush.entity.PersonalCalendarEntity;
+
+public interface CalendarRepository extends JpaRepository<PersonalCalendarEntity, Long>{
+	PersonalCalendarEntity findByIdAndDate(Long id, String today);
+	List<PersonalCalendarEntity> findByIdAndDateStartingWith(Long id, String yearMonth);
+}

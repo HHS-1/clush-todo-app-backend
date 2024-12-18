@@ -1,0 +1,23 @@
+package com.clush.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.clush.entity.SharedCalendarEntity;
+import com.clush.respository.SharedCalendarRepository;
+
+@Service
+public class SharedCalendarService {
+	
+	@Autowired
+	private SharedCalendarRepository sharedCalendarRepository;
+	
+	public ResponseEntity<Void> createSharedCalendarService(String name){
+		SharedCalendarEntity sharedCalendarEntity = new SharedCalendarEntity();
+		sharedCalendarEntity.setName(name);
+		
+		sharedCalendarRepository.save(sharedCalendarEntity);
+		return ResponseEntity.ok().build();
+	}
+}

@@ -1,0 +1,33 @@
+package com.clush.util;
+
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.clush.auth.CustomUserDetails;
+
+public class UserUtil {
+
+    public static String getUserId() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            return ((UserDetails) principal).getUsername();
+        } else {
+            return principal.toString(); 
+        }
+    }
+    
+    public static Long getId() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        
+        if (principal instanceof CustomUserDetails) {
+            CustomUserDetails customUserDetails = (CustomUserDetails) principal;
+            return customUserDetails.getId();  
+        } else if (principal instanceof UserDetails) {
+            // UserDetails로서 처리할 수 있는 다른 로직 추가 (예: getUsername() 등)
+            throw new IllegalStateException("Principal is not an instance of CustomUserDetails but UserDetails");
+        } else {
+            throw new IllegalStateException("Principal is not an instance of UserDetails or CustomUserDetails. Actual type: " + principal.getClass().getName());
+        }
+    }
+
+}

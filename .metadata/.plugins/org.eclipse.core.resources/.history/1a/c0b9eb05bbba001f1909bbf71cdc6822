@@ -1,0 +1,21 @@
+package com.clush.util;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.clush.auth.JwtAuthenticationToken;
+
+public class UserUtil {
+
+	public static String getUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        
+        // 인증 정보가 JwtAuthenticationToken인지 확인
+        if (authentication != null && authentication instanceof JwtAuthenticationToken) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            return userDetails.getUsername();
+        }
+        return null; 
+    }
+}

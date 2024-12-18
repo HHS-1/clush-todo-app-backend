@@ -1,0 +1,9 @@
+package com.clush.respository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.clush.entity.SharedCalendarEntity;
+
+public interface SharedCalendarRepository extends JpaRepository<SharedCalendarEntity, Long>{
+
+}

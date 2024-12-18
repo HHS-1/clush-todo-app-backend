@@ -1,0 +1,11 @@
+package com.clush.dto;
+
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+public interface SharedCalendarDto {
+
+	private long id;
+	private String name;
+}

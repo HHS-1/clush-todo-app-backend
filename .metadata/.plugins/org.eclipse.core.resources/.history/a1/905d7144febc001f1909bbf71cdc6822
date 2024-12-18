@@ -1,0 +1,5 @@
+package com.clush.service;
+
+public class EmailService {
+
+}

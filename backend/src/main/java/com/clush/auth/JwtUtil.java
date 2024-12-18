@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.Cookie;
@@ -20,9 +21,10 @@ public class JwtUtil {
     private long expirationTime;
 
     //JWT 토큰을 생성 후 return
-    public String generateToken(String userId) {
+    public String generateToken(String userId, long id) {
     	Claims claims=Jwts.claims();
     	claims.put("userId", userId);
+    	claims.put("id", id);
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
@@ -33,9 +35,10 @@ public class JwtUtil {
     
 
 	//refresh토큰 생성
-	public String generateRefreshToken(String userId) {
+	public String generateRefreshToken(String userId, long id) {
 		Claims claims = Jwts.claims();
 		claims.put("userId", userId);
+		claims.put("id", id);
 		return Jwts.builder()
 				.setClaims(claims)
 				.setIssuedAt(new Date(System.currentTimeMillis()))
@@ -56,11 +59,25 @@ public class JwtUtil {
     public String extractUserId(String token) {
         return extractClaims(token).get("userId").toString();
     }
+    public long extractId(String token) {
+    	Integer id = (Integer)extractClaims(token).get("id");
+    	return id.longValue();
+    }
     
 
     //토큰 만료 여부 체크
     public boolean isTokenExpired(String token) {
-        return extractClaims(token).getExpiration().before(new Date());
+    	try {
+            // Claims 추출을 시도하되 예외를 처리
+            Claims claims = extractClaims(token);
+            return claims.getExpiration().before(new Date()); // 만료일자 비교
+        } catch (ExpiredJwtException e) {
+            // 예외 발생 시 토큰이 만료된 것으로 처리
+            return true;
+        } catch (Exception e) {
+            // 다른 예외 처리 (예: 토큰 형식이 잘못된 경우 등)
+            throw new IllegalArgumentException("유효하지 않은 토큰입니다.");
+        }
     }
     
     // JWT 유효성 검증 메서드

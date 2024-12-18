@@ -1,0 +1,18 @@
+package com.clush.dto;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+public class SharedCalendarDto {
+
+	private long id;
+	private String name;
+	
+	// 생성자
+    public SharedCalendarDto(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+}
