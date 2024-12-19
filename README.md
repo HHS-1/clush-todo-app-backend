@@ -15,6 +15,8 @@ http://34.64.133.198/
 - **캘린더(개인)**: ToDo를 생성함에 따라 캘린더에 표시가 되며, 우선순위에 따라 색이 다르게 표시됩니다.
 - **캘린더(공유)**: 이메일을 통해 가입자를 초대하며, 공유 작업자와 함께 캘린더의 날짜 칸을 클릭하여 작업을 추가할 수 있습니다.
 
+
+
 ## 2. 소스 빌드 및 실행 방법 메뉴얼(로컬)
 
 ### 2.1. 프로젝트 빌드 및 실행 방법
@@ -39,6 +41,8 @@ http://34.64.133.198/
 1. DB 스키마 파일 링크 : https://github.com/HHS-1/clush-todo-app-backend/blob/main/db-schema.sql
 2. 기초데이터 백업 파일 링크 : https://github.com/HHS-1/clush-todo-app-backend/blob/main/db-initial.sql
 
+
+
 ## 3. 주력으로 사용한 라이브러리와 그 이유
 **1. Spring Security, JJWT, Redis**
 - 사용자 인증 / 인가를 통한 보안 강화
@@ -57,9 +61,12 @@ http://34.64.133.198/
 **5. javax.mail**
 - 캘린더 공유를 위한 이메일 초대 방식 구현을 위함.
 
+
+
 ## 4. RESTApi
 http://34.64.133.198:8081/swagger-ui/index.html 또는
 http://localhost:8081/swagger-ui/index.html
+
 
 
 ## 5. 테스트 케이스 - SharedCalendarControllerTest 테스트 설명
