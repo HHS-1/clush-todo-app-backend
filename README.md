@@ -1,4 +1,4 @@
-# 프로젝트명: [ClushTodoApp - backend]
+# 프로젝트명: [ClushTodoApp - backend]  with Spring Boot 3.4.0
 
 ## 1. 자신이 개발한 앱에 대한 설명
 
@@ -15,7 +15,17 @@ http://34.64.133.198/
 - **캘린더(개인)**: ToDo를 생성함에 따라 캘린더에 표시가 되며, 우선순위에 따라 색이 다르게 표시됩니다.
 - **캘린더(공유)**: 이메일을 통해 가입자를 초대하며, 공유 작업자와 함께 캘린더의 날짜 칸을 클릭하여 작업을 추가할 수 있습니다.
 
-
+### 기술 스택
+- **Spring Boot 3.4.0**
+- **mysql 8.0.36**
+- **JPA**
+- **Spring Security**
+- **JWT**
+- **Javax.mail**
+- **Juit**
+- **Swagger**
+- **Google Cloud PlatForm**
+- **Nginx**
 
 ## 2. 소스 빌드 및 실행 방법 메뉴얼(로컬)
 
