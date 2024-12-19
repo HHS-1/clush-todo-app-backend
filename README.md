@@ -62,9 +62,9 @@ http://34.64.133.198:8081/swagger-ui/index.html 또는
 http://localhost:8081/swagger-ui/index.html
 
 
-### 5. 테스트 케이스 - SharedCalendarControllerTest 테스트 설명
+## 5. 테스트 케이스 - SharedCalendarControllerTest 테스트 설명
 
-#### 1. testGetSharedCalendar
+### 1. testGetSharedCalendar
 - **목적**: `/shared` 엔드포인트가 정상적으로 데이터를 반환하는지 확인합니다.
 
 - **테스트 과정**:
@@ -79,7 +79,7 @@ http://localhost:8081/swagger-ui/index.html
 
 ---
 
-#### 2. testGetSharedCalendarNoContent
+### 2. testGetSharedCalendarNoContent
 - **목적**: `/shared` 엔드포인트가 데이터가 없을 경우 적절한 응답을 반환하는지 확인합니다.
 
 - **테스트 과정**:
