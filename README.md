@@ -8,10 +8,9 @@
 
 
 **주요 기능**:
-- **기능 1**: [기능 1 설명]
-- **기능 2**: [기능 2 설명]
-- **기능 3**: [기능 3 설명]
-- **기능 4**: [기능 4 설명]
+- **ToDo**: 제목, 내용, 날짜, 우선순위, 진행상태로 이루어진 ToDo데이터를 생성, 조회, 수정할 수 있습니다. 
+- **캘린더(개인)**: ToDo를 생성함에 따라 캘린더에 표시가 되며, 우선순위에 따라 색이 다르게 표시됩니다.
+- **캘린더(공유)**: 이메일을 통해 가입자를 초대하며, 공유 작업자와 함께 캘린더의 날짜 칸을 클릭하여 작업을 추가할 수 있습니다.
 
 ## 2. 소스 빌드 및 실행 방법 메뉴얼
 
@@ -19,4 +18,15 @@
 
 1. **Git Clone**:
    ```bash
-   git clone https://github.com/[your-username]/[project-name].git
+   git clone https://github.com/HHS-1/clush-todo-app-backend.git
+
+2. **properties 파일 저장**
+   서버 정보가 담긴 properties 파일을 src/main/resource에 저장합니다.
+
+3. **프로젝트 실행**
+   ```bash
+   mvn clean install   // 의존성 설치
+   mvn spring-boot:run // 어플리케이션 실행
+
+   http://localhost:8080 접속 후 실행 확인
+
