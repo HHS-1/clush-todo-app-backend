@@ -62,3 +62,33 @@ http://34.64.133.198:8081/swagger-ui/index.html 또는
 http://localhost:8081/swagger-ui/index.html
 
 
+### 5. 테스트 케이스 - SharedCalendarControllerTest 테스트 설명
+
+#### 1. testGetSharedCalendar
+- **목적**: `/shared` 엔드포인트가 정상적으로 데이터를 반환하는지 확인합니다.
+
+- **테스트 과정**:
+  1. `SharedCalendarService`가 두 개의 캘린더 데이터(`Calendar 1`, `Calendar 2`)를 포함한 리스트를 반환하도록 설정합니다.
+  2. `MockMvc`를 사용해 `/shared` 경로로 GET 요청을 보냅니다.
+  3. 다음 사항을 검증합니다:
+     - HTTP 상태 코드가 **200 OK**인지 확인합니다.
+     - 응답의 콘텐츠 타입이 `application/json`인지 확인합니다.
+     - 응답 JSON 배열의 첫 번째 항목 이름이 "Calendar 1"이고, 두 번째 항목 이름이 "Calendar 2"인지 확인합니다.
+
+- **기대 결과**: `/shared` 경로 요청 시, 예상한 캘린더 리스트가 올바르게 반환됩니다.
+
+---
+
+#### 2. testGetSharedCalendarNoContent
+- **목적**: `/shared` 엔드포인트가 데이터가 없을 경우 적절한 응답을 반환하는지 확인합니다.
+
+- **테스트 과정**:
+  1. `SharedCalendarService`가 데이터가 없음을 나타내는 HTTP 상태 코드 **204 No Content**를 반환하도록 설정합니다.
+  2. `MockMvc`를 사용해 `/shared` 경로로 GET 요청을 보냅니다.
+  3. 다음 사항을 검증합니다:
+     - HTTP 상태 코드가 **204 No Content**인지 확인합니다.
+
+- **기대 결과**: `/shared` 경로 요청 시, 데이터가 없을 경우 204 상태 코드를 반환합니다.
+
+
+
