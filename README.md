@@ -97,6 +97,6 @@ http://localhost:8081/swagger-ui/index.html
 
 - **기대 결과**: `/shared` 경로 요청 시, 데이터가 없을 경우 204 상태 코드를 반환합니다.
 
-## 시연영상
+## 6. 시연영상
 https://github.com/HHS-1/clush-todo-app-backend/raw/refs/heads/main/%EA%B3%B5%EC%9C%A0%EC%BA%98%EB%A6%B0%EB%8D%94%20%EC%8B%9C%EC%97%B0%EC%97%B0%EC%83%81.mp4
 
