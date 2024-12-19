@@ -35,3 +35,8 @@ build/
 *.properties
 .metadata/
 frontend/
+
+# Maven Wrapper (필요 없으면 추가)
+mvnw
+mvnw.cmd
+/.mvn/

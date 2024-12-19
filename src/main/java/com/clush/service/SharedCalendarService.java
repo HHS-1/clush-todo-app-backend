@@ -101,16 +101,14 @@ public class SharedCalendarService {
 
         // 인증되지 않은 경우
         if (authentication == null || !authentication.isAuthenticated() || authentication.getPrincipal().equals("anonymousUser")) {
-        	System.out.println("로그인 안 ㅗ딤");
         	HttpSession session = request.getSession();
             session.setAttribute("redirectUrl", request.getRequestURL().toString());
         	
             return ResponseEntity.status(302)
-                .header("Location", "http://localhost:3000/login")
+                .header("Location", "http://34.64.133.198/login")
                 .build();
         }
-        System.out.println("로그인 됨");
-        
+        	
         long userId = UserUtil.getId();
         UserEntity user = userRepository.findById(userId)
 	            .orElseThrow(() -> new IllegalArgumentException("아이디를 찾을 수 없음 id: " + userId));
@@ -121,7 +119,7 @@ public class SharedCalendarService {
         sharedCalendar.getUsers().add(user);
 
         return ResponseEntity.status(302)
-                .header("Location", "http://localhost:3000/")
+                .header("Location", "http://34.64.133.198/")
                 .build();
 	
 	}

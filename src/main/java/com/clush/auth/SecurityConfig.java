@@ -39,6 +39,7 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .addFilterBefore(new CorsFilter(corsConfigurationSource()), UsernamePasswordAuthenticationFilter.class) // CORS 필터 추가
             .authorizeHttpRequests(authorize -> authorize
+            	.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 .requestMatchers("/user/**").permitAll()
                 .requestMatchers("/shared/invite/**").permitAll()
                 .anyRequest().authenticated()
@@ -56,7 +57,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000")); // 허용할 도메인
+        configuration.setAllowedOrigins(List.of("http://34.64.133.198", "http://localhost:3000")); // 허용할 도메인
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH")); // 허용할 HTTP 메서드
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Requested-With", "Accept")); // 허용할 요청 헤더
         configuration.setExposedHeaders(List.of("Set-Cookie")); // 응답 헤더 노출

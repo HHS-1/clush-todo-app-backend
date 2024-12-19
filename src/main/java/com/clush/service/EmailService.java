@@ -44,7 +44,7 @@ public class EmailService {
 		
 		
 		String userName = UserUtil.getUserId().split("@")[0];
-		String calendarInviteUrl = "http:localhost:8080/shared/invite?accept="+AESUtil.encrypt(id);
+		String calendarInviteUrl = "http:34.64.133.198:8081/shared/invite?accept="+AESUtil.encrypt(id);
 		
 		Properties props = new Properties();
 		props.put("mail.smtp.host", host);

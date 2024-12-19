@@ -11,7 +11,7 @@
 	<groupId>com.clush</groupId>
 	<artifactId>backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>backend</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
@@ -31,19 +31,28 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
-		
+		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
+		<dependency>
+		    <groupId>org.springdoc</groupId>
+		    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+		    <version>2.6.0</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <scope>test</scope>
+		</dependency>
 		<dependency>
 		    <groupId>com.sun.mail</groupId>
 		    <artifactId>javax.mail</artifactId>
 		    <version>1.6.2</version> 
 		</dependency>
-
 		<dependency>
 		    <groupId>io.jsonwebtoken</groupId>
-       		<artifactId>jjwt</artifactId>
+	        <artifactId>jjwt</artifactId>
         	<version>0.9.1</version>
 		</dependency>
-
 	    <dependency>
     		<groupId>javax.xml.bind</groupId>
     		<artifactId>jaxb-api</artifactId>
@@ -63,7 +72,6 @@
 	        <groupId>org.glassfish.jaxb</groupId>
 	        <artifactId>jaxb-runtime</artifactId>
 	    </dependency>
-		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -76,7 +84,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>org.springframework.plugin</groupId>
+            <artifactId>spring-plugin-core</artifactId>
+            <version>2.0.0.RELEASE</version>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -107,7 +123,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
@@ -118,7 +133,6 @@
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -147,5 +161,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
