@@ -83,33 +83,71 @@ http://localhost:8081/swagger-ui/index.html
 
 
 
-## 5. 테스트 케이스 - SharedCalendarControllerTest 테스트 설명
+## 5. 테스트 케이스 - 테스트 설명
 
-### 1. testGetSharedCalendar
-- **목적**: `/shared` 엔드포인트가 정상적으로 데이터를 반환하는지 확인합니다.
+# 1. CalendarServiceTest
 
-- **테스트 과정**:
-  1. `SharedCalendarService`가 두 개의 캘린더 데이터(`Calendar 1`, `Calendar 2`)를 포함한 리스트를 반환하도록 설정합니다.
-  2. `MockMvc`를 사용해 `/shared` 경로로 GET 요청을 보냅니다.
-  3. 다음 사항을 검증합니다:
-     - HTTP 상태 코드가 **200 OK**인지 확인합니다.
-     - 응답의 콘텐츠 타입이 `application/json`인지 확인합니다.
-     - 응답 JSON 배열의 첫 번째 항목 이름이 "Calendar 1"이고, 두 번째 항목 이름이 "Calendar 2"인지 확인합니다.
+### 목적
+`CalendarService`가 올바르게 동작하는지 확인하기 위한 테스트입니다.
 
-- **기대 결과**: `/shared` 경로 요청 시, 예상한 캘린더 리스트가 올바르게 반환됩니다.
+### 테스트 과정
+- **getCalendar_WhenDataExists_ReturnsOk**
+  - `CalendarService`의 `getCalendarService()` 메서드가 `findByUserIdAndDateStartingWith` 메서드에서 반환된 데이터를 정상적으로 반환하는지 확인합니다.
+  - 데이터가 존재하는 경우, 응답이 정상적으로 `200 OK`로 반환되어야 합니다.
+  
+### 기대 결과
+- 캘린더 데이터가 정상적으로 반환되며, `200 OK` 응답이 반환됩니다.
 
 ---
 
-### 2. testGetSharedCalendarNoContent
-- **목적**: `/shared` 엔드포인트가 데이터가 없을 경우 적절한 응답을 반환하는지 확인합니다.
+# 2. EmailServiceTest
 
-- **테스트 과정**:
-  1. `SharedCalendarService`가 데이터가 없음을 나타내는 HTTP 상태 코드 **204 No Content**를 반환하도록 설정합니다.
-  2. `MockMvc`를 사용해 `/shared` 경로로 GET 요청을 보냅니다.
-  3. 다음 사항을 검증합니다:
-     - HTTP 상태 코드가 **204 No Content**인지 확인합니다.
+### 목적
+`EmailService`의 이메일 전송 기능을 테스트합니다.
 
-- **기대 결과**: `/shared` 경로 요청 시, 데이터가 없을 경우 204 상태 코드를 반환합니다.
+### 테스트 과정
+- **sendEmailService_WhenUserExists_ReturnsOk**
+  - 이메일을 보내는 대상 사용자가 존재하는 경우, 이메일이 정상적으로 전송되는지 확인합니다.
+  - 이메일이 정상적으로 전송되면 `200 OK` 응답이 반환되어야 합니다.
+
+- **sendEmailService_WhenUserNotFound_ReturnsNotFound**
+  - 이메일을 보내려는 대상 사용자가 존재하지 않을 경우, `404 Not Found` 응답이 반환되어야 합니다.
+  
+- **sendEmailService_WhenMessagingExceptionOccurs_ReturnsInternalServerError**
+  - 이메일 전송 도중 메시징 예외가 발생하는 경우, `500 Internal Server Error` 응답이 반환되어야 합니다.
+
+### 기대 결과
+- 사용자가 존재할 경우 `200 OK`, 사용자가 존재하지 않을 경우 `404 Not Found`, 예외 발생 시 `500 Internal Server Error` 응답이 반환되어야 합니다.
+
+---
+
+# 3. SharedCalendarServiceTest
+
+### 목적
+`SharedCalendarService`의 공유 캘린더 관련 기능을 테스트합니다.
+
+### 테스트 과정
+- **getSharedCalendarService_WhenDataExists_ReturnsOk**
+  - 공유 캘린더 데이터가 존재하는 경우, 해당 데이터를 정상적으로 반환하는지 확인합니다.
+  - 데이터가 존재하는 경우 `200 OK` 응답이 반환되어야 합니다.
+
+- **createSharedCalendarService_WhenValidData_ReturnsOk**
+  - 유효한 데이터가 주어졌을 때, 공유 캘린더가 정상적으로 생성되는지 확인합니다.
+  - 정상적으로 생성된 경우 `200 OK` 응답이 반환됩니다.
+
+- **createSharedToDoService_WhenValidData_ReturnsOk**
+  - 유효한 데이터를 사용하여 할 일이 정상적으로 생성되는지 확인합니다.
+  - 할 일이 정상적으로 생성되면 `200 OK` 응답이 반환됩니다.
+
+- **getSharedCalendarService_WhenCalendarNotFound_ReturnsNotFound**
+  - 요청된 캘린더가 존재하지 않을 경우 `404 Not Found` 응답이 반환되어야 합니다.
+
+- **shareCalendarService_WhenAuthenticated_ReturnsRedirect**
+  - 인증된 사용자가 캘린더를 공유할 때, 리다이렉션 응답이 반환되는지 확인합니다.
+  - 인증된 사용자의 경우, 적절한 리다이렉션 응답이 반환됩니다.
+
+### 기대 결과
+- 각 기능에 대해 정상적인 HTTP 응답 코드가 반환됩니다. 예를 들어, 데이터가 존재하거나 유효한 경우 `200 OK`, 캘린더가 없거나 인증되지 않은 경우 `404 Not Found` 또는 `401 Unauthorized`, 인증된 사용자에게는 리다이렉션 응답이 반환됩니다.
 
 ## 6. 시연영상
 https://github.com/HHS-1/clush-todo-app-backend/raw/refs/heads/main/%EA%B3%B5%EC%9C%A0%EC%BA%98%EB%A6%B0%EB%8D%94%20%EC%8B%9C%EC%97%B0%EC%97%B0%EC%83%81.mp4
