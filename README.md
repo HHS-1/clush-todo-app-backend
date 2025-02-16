@@ -52,8 +52,8 @@ ID qazplm10219@gmail.com , PW test
 
 ### 2.2. DB 스키마 및 기초데이터 백업 파일
 
-1. DB 스키마 파일 링크 : https://github.com/HHS-1/clush-todo-app-backend/blob/main/db-schema.sql
-2. 기초데이터 백업 파일 링크 : https://github.com/HHS-1/clush-todo-app-backend/blob/main/db-initial.sql
+1. DB 스키마 파일 링크 : [https://github.com/HHS-1/clush-todo-app-backend/blob/main/db-schema.sql](https://github.com/HHS-1/clush-todo-app-backend/blob/main/schema_backup.sql)
+2. 기초데이터 백업 파일 링크 : [https://github.com/HHS-1/clush-todo-app-backend/blob/main/db-initial.sql](https://github.com/HHS-1/clush-todo-app-backend/blob/main/initial_backup.sql)
 
 
 
