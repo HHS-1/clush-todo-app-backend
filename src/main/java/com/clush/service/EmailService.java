@@ -27,7 +27,7 @@ public class EmailService {
 	@Value("${smtp.host}")
 	private String host;
 	@Value("${smtp.port}")
-	private String port;
+	private int port;
 	@Value("${smtp.user}")
 	private String user;
 	@Value("${smtp.password}")
@@ -44,26 +44,27 @@ public class EmailService {
 		
 		
 		String userName = UserUtil.getUserId().split("@")[0];
-		String calendarInviteUrl = "http:34.64.133.198:8081/shared/invite?accept="+AESUtil.encrypt(id);
+		//String userName = "testID"; //테스트용
+		String calendarInviteUrl = "http:34.22.66.2:8081/shared/invite?accept="+AESUtil.encrypt(id);
 		
 		Properties props = new Properties();
-		props.put("mail.smtp.host", host);
-		props.put("mail.smtp.port", port);  // TLS 포트
+		props.put("mail.smtp.host", "smtp.naver.com");
+		props.put("mail.smtp.port", 587);  // TLS 포트
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true"); // TLS 활성화
 		props.put("mail.smtp.starttls.required", "true"); // TLS 강제
-		props.put("mail.smtp.ssl.trust", host);
+		props.put("mail.smtp.ssl.trust", "smtp.naver.com");
 		props.put("mail.smtp.ssl.protocols", "TLSv1.2");
         
         Session session = Session.getInstance(props, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(user, password);
+                return new PasswordAuthentication("qazplm1021@naver.com", "6Y71S7RVVU4Q");
             }
         });
 
         MimeMessage message = new MimeMessage(session);
-        message.setFrom(new InternetAddress(user));  // Set sender's email address
+        message.setFrom(new InternetAddress("qazplm1021@naver.com"));  // Set sender's email address
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email)); 
         message.setSubject(userName + "님의 공유캘린더 초대");
         String htmlContent = "<html>" +

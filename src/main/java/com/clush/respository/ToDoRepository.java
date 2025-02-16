@@ -10,4 +10,5 @@ public interface ToDoRepository extends JpaRepository<ToDoEntity, Long> {
     List<ToDoEntity> findByDate(String date);
     
     List<ToDoEntity> findByDateAndUserId(String date, Long userId);
+    
 }

@@ -105,7 +105,7 @@ public class SharedCalendarService {
             session.setAttribute("redirectUrl", request.getRequestURL().toString());
         	
             return ResponseEntity.status(302)
-                .header("Location", "http://34.64.133.198/login")
+                .header("Location", "http://34.22.66.2/login")
                 .build();
         }
         	
@@ -119,7 +119,7 @@ public class SharedCalendarService {
         sharedCalendar.getUsers().add(user);
 
         return ResponseEntity.status(302)
-                .header("Location", "http://34.64.133.198/")
+                .header("Location", "http://34.22.66.2/")
                 .build();
 	
 	}

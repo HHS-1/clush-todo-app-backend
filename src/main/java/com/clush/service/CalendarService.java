@@ -20,8 +20,8 @@ public class CalendarService {
 	
 	public ResponseEntity<List<CalendarEntity>> getCalendarService(String yearMonth){
 		long id = UserUtil.getId();
-		List<CalendarEntity> calendarData = calendarRepository.findByIdAndDateStartingWith(id,yearMonth);
-	    
+		//long id = 2L; // 테스트용
+		List<CalendarEntity> calendarData = calendarRepository.findByUserIdAndDateStartingWith(id,yearMonth);
 	    if (calendarData.isEmpty()) {
 	        return ResponseEntity.noContent().build(); 
 	    }

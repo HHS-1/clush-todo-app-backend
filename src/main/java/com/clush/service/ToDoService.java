@@ -40,12 +40,26 @@ public class ToDoService {
 
         List<ToDoEntity> todayToDos = toDoRepository.findByDateAndUserId(today, id);
 
+        
         if (todayToDos.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
 
         return ResponseEntity.ok(todayToDos);
     }
+	
+	@Transactional(readOnly=true)
+	public ResponseEntity<List<ToDoEntity>> getSomedayToDoService(String date){
+		long id = UserUtil.getId();
+		
+		List<ToDoEntity> somedayToDos = toDoRepository.findByDateAndUserId(date, id);
+		
+		if (somedayToDos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(somedayToDos);
+	}
 	
 	@Transactional
 	public ResponseEntity<ToDoEntity> getToDoService(Long id){

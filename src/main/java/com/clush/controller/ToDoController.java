@@ -40,6 +40,11 @@ public class ToDoController {
         return toDoService.getTodayToDoService();
     }
     
+    @GetMapping("/{date}/date")
+    public ResponseEntity<List<ToDoEntity>> getSomedayToDos(@PathVariable("date") String date){
+    	return toDoService.getSomedayToDoService(date);
+    }
+    
     @GetMapping("/{id}")
     @Operation(summary = "특정 todo 조회 API", 
                description = "특정 id에 해당하는 Todo 작업 하나를 가져옵니다.")
