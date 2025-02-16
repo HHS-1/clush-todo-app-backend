@@ -78,7 +78,7 @@ ID qazplm10219@gmail.com , PW test
 
 
 ## 4. RESTApi
-http://34.64.133.198:8081/swagger-ui/index.html 또는
+http://34.22.66.2:8081/swagger-ui/index.html 또는
 http://localhost:8081/swagger-ui/index.html
 
 
